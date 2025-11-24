@@ -7,11 +7,11 @@ from telegram.ext import CommandHandler, Updater
 with open("config.json") as f:
     config = json.load(f)
 
-telegram_token = config["telegram_token"]
+8525361188:AAFE1LBMuibVdoDs5AWoTQFeSswKDmBlAKo = config["8525361188:AAFE1LBMuibVdoDs5AWoTQFeSswKDmBlAKo"]
 
 # Telegram bot setup
-bot = Bot(token=telegram_token)
-updater = Updater(token=telegram_token, use_context=True)
+bot = Bot(token=8525361188:AAFE1LBMuibVdoDs5AWoTQFeSswKDmBlAKo)
+updater = Updater(token=8525361188:AAFE1LBMuibVdoDs5AWoTQFeSswKDmBlAKo, use_context=True)
 dispatcher = updater.dispatcher
 
 # Simple /start command
