@@ -1,27 +1,15 @@
-import json
-import ccxt
-from telegram import Bot
-from telegram.ext import CommandHandler, Updater
+import telebot
 
-# Load config
-with open("config.json") as f:
-    config = json.load(f)
+BOT_TOKEN = "8226369849:AAFcWM34yciiTCTAy-3q-F0sD6E5dsSBpsc"
+CHAT_ID = "https://t.me/Sniper0719_bot"
 
-8525361188:AAFE1LBMuibVdoDs5AWoTQFeSswKDmBlAKo = config["8525361188:AAFE1LBMuibVdoDs5AWoTQFeSswKDmBlAKo"]
+bot = telebot.TeleBot(BOT_TOKEN)
 
-# Telegram bot setup
-bot = Bot(token=8525361188:AAFE1LBMuibVdoDs5AWoTQFeSswKDmBlAKo)
-updater = Updater(token=8525361188:AAFE1LBMuibVdoDs5AWoTQFeSswKDmBlAKo, use_context=True)
-dispatcher = updater.dispatcher
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.send_message(message.chat.id, "Bot is running!")
 
-# Simple /start command
-def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="AI Trading Bot is online!")
+def send_signal(text):
+    bot.send_message(CHAT_ID, text)
 
-start_handler = CommandHandler('start', start)
-dispatcher.add_handler(start_handler)
-
-# Start bot
-updater.start_polling()
-print("Bot is running...")
-updater.idle()
+bot.polling()
