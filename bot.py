@@ -1,20 +1,20 @@
-import json
 import telebot
+import json
 
 # Load config.json
 with open("config.json") as f:
     config = json.load(f)
 
-BOT_TOKEN = config["8226369849:AAFcWM34yciiTCTAy-3q-F0sD6E5dsSBpsc"]
-CHAT_ID = config["8183172862"]
+BOT_TOKEN = config["TELEGRAM_BOT_TOKEN"]
+CHAT_ID = config["CHAT_ID"]
 
-bot = telebot.TeleBot(8226369849:AAFcWM34yciiTCTAy-3q-F0sD6E5dsSBpsc)
+bot = telebot.TeleBot(BOT_TOKEN)
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.send_message(message.8183172862, "Bot is running!")
+    bot.send_message(message.chat.id, "Bot is running!")
 
 def send_signal(text):
-    bot.send_message(8183172862, text)
+    bot.send_message(CHAT_ID, text)
 
-bot.pollingf()
+bot.polling()
