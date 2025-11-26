@@ -1,15 +1,31 @@
+cat > bot.py <<'PY'
 import json
-import telebot
+import sys
 
-# Load config.json
-with open("config.json", "r", encoding="utf-8") as f:
-    config = json.load(f)
+# Minimal debug loader
+try:
+    with open("config.json", "r", encoding="utf-8") as f:
+        config = json.load(f)
+except Exception as e:
+    print("ERROR reading config.json:", repr(e))
+    sys.exit(1)
 
-BOT_TOKEN = config.get("BOT_TOKEN")   # FIXED
-CHAT_ID = config.get("CHAT_ID")       # FIXED
+BOT_TOKEN = config.get("BOT_TOKEN")
+CHAT_ID = config.get("CHAT_ID")
 
-if BOT_TOKEN is None or CHAT_ID is None:
-    raise SystemExit("Missing BOT_TOKEN or CHAT_ID in config.json")
+if not BOT_TOKEN or not CHAT_ID:
+    print("CONFIG KEYS MISSING. Found keys:", list(config.keys()))
+    sys.exit(1)
+
+print("Config loaded OK. BOT_TOKEN length:", len(BOT_TOKEN))
+print("CHAT_ID value:", CHAT_ID)
+
+# Do not import telebot until we confirm basic config is OK
+try:
+    import telebot
+except Exception as e:
+    print("telebot import failed (is it installed?):", repr(e))
+    sys.exit(1)
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
@@ -17,9 +33,7 @@ bot = telebot.TeleBot(BOT_TOKEN)
 def send_welcome(message):
     bot.send_message(message.chat.id, "Bot is running!")
 
-def send_signal(text):
-    bot.send_message(CHAT_ID, text)
-
 if __name__ == "__main__":
-    print("Starting bot with CHAT_ID =", CHAT_ID)
+    print("Starting bot.polling()")
     bot.polling()
+PY
