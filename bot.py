@@ -4,7 +4,7 @@ import telebot
 with open("config.json") as f:
     config = json.load(f)
 
-BOT_TOKEN = config["TELEGRAM_BOT_TOKEN"]
+BOT_TOKEN = config["BOT_TOKEN"]
 CHAT_ID = config["CHAT_ID"]
 
 bot = telebot.TeleBot(BOT_TOKEN)
