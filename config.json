@@ -1,6 +1,4 @@
-cat > config.json <<'JSON'
 {
-  "BOT_TOKEN": "8226369849:AAFcWM34yciiTCTAy-3q-F0sD6E5dsSBpsc",
-  "CHAT_ID": "818317"
+    "BOT_TOKEN": "8226369849:AAFcWM34yciiTCTAy-3q-XXXXXXXXXX",
+    "CHAT_ID": "818317"
 }
-JSON
